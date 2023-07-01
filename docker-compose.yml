@@ -1,8 +1,8 @@
 version: '3.1'
 services:
   stats-server:
-    build: stats-server
-    image: stats-server
+    build: stat-svc/server
+    image: server
     container_name: server
     ports:
       - "9090:9090"
@@ -13,7 +13,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://stats-db:5432/ewm_stats
       - SPRING_DATASOURCE_USERNAME=stats
       - SPRING_DATASOURCE_PASSWORD=stats
-      - TZ=Europe/Moscow
+#      - TZ=Europe/Moscow
 
 
   stats-db:

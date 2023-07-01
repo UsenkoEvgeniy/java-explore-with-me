@@ -23,10 +23,8 @@
 	</properties>
 
 	<modules>
-		<module>stats-server</module>
-		<module>client</module>
-		<module>dto</module>
 		<module>main-service</module>
+		<module>stat-svc</module>
 	</modules>
 
 	<build>
