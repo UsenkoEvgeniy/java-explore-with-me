@@ -1,12 +1,15 @@
 package ru.practicum.explore_with_me;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
 import java.time.LocalDateTime;
 
+@Data
 public class EndpointHitDto {
+    public static final String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
     @NotEmpty
     private String app;
@@ -14,40 +17,7 @@ public class EndpointHitDto {
     private String uri;
     @NotEmpty
     private String ip;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = DATE_TIME_PATTERN)
     @Past
     private LocalDateTime timestamp;
-
-    public String getApp() {
-        return app;
-    }
-
-    public String getUri() {
-        return uri;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public void setApp(String app) {
-        this.app = app;
-    }
-
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-    }
-
 }

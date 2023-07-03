@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.proxy.HibernateProxy;
+import ru.practicum.explore_with_me.EndpointHitDto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Past;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -31,14 +30,10 @@ public class EndpointHit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer id;
-    @NotEmpty
     private String app;
-    @NotEmpty
     private String uri;
-    @NotEmpty
     private String ip;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Past
+    @JsonFormat(pattern = EndpointHitDto.DATE_TIME_PATTERN)
     private LocalDateTime timestamp;
 
     @Override
