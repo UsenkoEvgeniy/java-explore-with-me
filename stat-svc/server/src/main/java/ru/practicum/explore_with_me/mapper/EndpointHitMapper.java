@@ -1,6 +1,6 @@
 package ru.practicum.explore_with_me.mapper;
 
-import ru.practicum.explore_with_me.EndpointHitDto;
+import ru.practicum.explore_with_me.stats.EndpointHitDto;
 import ru.practicum.explore_with_me.model.EndpointHit;
 
 public class EndpointHitMapper {

@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import ru.practicum.explore_with_me.EndpointHitDto;
-import ru.practicum.explore_with_me.ViewStats;
+import ru.practicum.explore_with_me.DateConstant;
+import ru.practicum.explore_with_me.stats.EndpointHitDto;
+import ru.practicum.explore_with_me.stats.ViewStats;
 import ru.practicum.explore_with_me.service.StatsService;
 
 import javax.validation.Valid;
@@ -33,8 +34,8 @@ public class StatsController {
     }
 
     @GetMapping("/stats")
-    public List<ViewStats> getStats(@RequestParam @DateTimeFormat(pattern = EndpointHitDto.DATE_TIME_PATTERN) LocalDateTime start,
-                                       @RequestParam @DateTimeFormat(pattern = EndpointHitDto.DATE_TIME_PATTERN) LocalDateTime end,
+    public List<ViewStats> getStats(@RequestParam @DateTimeFormat(pattern = DateConstant.DATE_TIME_PATTERN) LocalDateTime start,
+                                       @RequestParam @DateTimeFormat(pattern = DateConstant.DATE_TIME_PATTERN) LocalDateTime end,
                                        @RequestParam (required = false) List<String> uris,
                                        @RequestParam (defaultValue = "false") boolean unique) {
         log.info("Get request with start {} end {} unique {} uris {}", start, end, unique, uris);

@@ -1,6 +1,7 @@
 package ru.practicum.explore_with_me;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
@@ -11,19 +12,25 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
+import ru.practicum.explore_with_me.stats.EndpointHitDto;
+import ru.practicum.explore_with_me.stats.ViewStats;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import static ru.practicum.explore_with_me.DateConstant.DATE_TIME_PATTERN;
+
+@Service
 public class StatsClient {
 
     private final RestTemplate rest;
     private final String serverUrl;
     private final ObjectMapper objectMapper;
-    private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
 
     public StatsClient(@Value("${stats-server.url}")String serverUrl) {
         this.serverUrl = serverUrl;
@@ -33,7 +40,7 @@ public class StatsClient {
                 .addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(dtf)));
     }
 
-    public ResponseEntity<Object> getStats(LocalDateTime start, LocalDateTime end, List<String> uris, Boolean unique) {
+    public List<ViewStats> getStats(LocalDateTime start, LocalDateTime end, List<String> uris, Boolean unique) {
 
         String path = serverUrl + "/stats?start=" + start.format(dtf) + "&end=" + end.format(dtf);
         if (unique != null) {
@@ -42,7 +49,7 @@ public class StatsClient {
         if (uris != null && !uris.isEmpty()) {
             path += "&uris=" + String.join("&uris=", uris);
         }
-        return makeAndSendRequest(HttpMethod.GET, path, null);
+        return objectMapper.convertValue(makeAndSendRequest(HttpMethod.GET, path, null).getBody(), new TypeReference<List<ViewStats>>(){});
     }
 
     public ResponseEntity<Object> saveHit(EndpointHitDto hit) {
