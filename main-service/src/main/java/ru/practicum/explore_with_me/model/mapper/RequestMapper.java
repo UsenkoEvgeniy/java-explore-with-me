@@ -1,13 +1,13 @@
 package ru.practicum.explore_with_me.model.mapper;
 
+import lombok.experimental.UtilityClass;
 import ru.practicum.explore_with_me.model.Request;
 import ru.practicum.explore_with_me.request.ParticipationRequestDto;
 
+@UtilityClass
 public class RequestMapper {
-    private RequestMapper() {
-    }
 
-    public static ParticipationRequestDto toParticipationRequestDto(Request request) {
+    public ParticipationRequestDto toParticipationRequestDto(Request request) {
         ParticipationRequestDto dto = new ParticipationRequestDto();
         dto.setId(request.getId());
         dto.setCreated(request.getCreated());

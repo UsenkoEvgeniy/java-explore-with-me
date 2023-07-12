@@ -1,16 +1,16 @@
 package ru.practicum.explore_with_me.model.mapper;
 
+import lombok.experimental.UtilityClass;
 import ru.practicum.explore_with_me.event.EventFullDto;
 import ru.practicum.explore_with_me.event.EventShortDto;
 import ru.practicum.explore_with_me.event.NewEventDto;
 import ru.practicum.explore_with_me.model.Category;
 import ru.practicum.explore_with_me.model.Event;
 
+@UtilityClass
 public class EventMapper {
-    private EventMapper() {
-    }
 
-    public static Event newEventToEvent(NewEventDto dto) {
+    public Event newEventToEvent(NewEventDto dto) {
         Event event = new Event();
         event.setAnnotation(dto.getAnnotation());
         Category category = new Category();
@@ -26,7 +26,7 @@ public class EventMapper {
         return event;
     }
 
-    public static EventFullDto toEventFullDto(Event event) {
+    public EventFullDto toEventFullDto(Event event) {
         EventFullDto dto = new EventFullDto();
         dto.setId(event.getId());
         dto.setAnnotation(event.getAnnotation());
@@ -47,7 +47,7 @@ public class EventMapper {
         return dto;
     }
 
-    public static EventShortDto toEventShortDto(Event event) {
+    public EventShortDto toEventShortDto(Event event) {
         EventShortDto dto = new EventShortDto();
         dto.setId(event.getId());
         dto.setAnnotation(event.getAnnotation());

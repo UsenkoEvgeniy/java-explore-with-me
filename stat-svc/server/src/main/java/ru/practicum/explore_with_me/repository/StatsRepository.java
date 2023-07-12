@@ -14,21 +14,21 @@ public interface StatsRepository extends JpaRepository<EndpointHit, Integer> {
     @Query("select new ru.practicum.explore_with_me.stats.ViewStats(e.app, e.uri, count(e.ip) as hits) " +
             "from EndpointHit e " +
             "where ((coalesce(:uris) is null) or (e.uri in :uris)) " +
-            "and e.timestamp between :timestampStart and :timestampEnd " +
+            "and e.timestamp between :start and :end " +
             "group by e.app, e.uri " +
             "order by hits desc")
     List<ViewStats> getViewStats(@Param("uris") Collection<String> uris,
-                                 @Param("timestampStart") LocalDateTime timestampStart,
-                                 @Param("timestampEnd") LocalDateTime timestampEnd);
+                                 @Param("start") LocalDateTime start,
+                                 @Param("end") LocalDateTime end);
 
     @Query("select new ru.practicum.explore_with_me.stats.ViewStats(e.app, e.uri, count(distinct e.ip) as hits) " +
             "from EndpointHit e " +
             "where ((coalesce(:uris) is null) or (e.uri in :uris)) " +
-            "and e.timestamp between :timestampStart and :timestampEnd " +
+            "and e.timestamp between :start and :end " +
             "group by e.app, e.uri " +
             "order by hits desc")
     List<ViewStats> getViewStatsUnique(@Param("uris") Collection<String> uris,
-                                 @Param("timestampStart") LocalDateTime timestampStart,
-                                 @Param("timestampEnd") LocalDateTime timestampEnd);
+                                 @Param("start") LocalDateTime start,
+                                 @Param("end") LocalDateTime end);
 
 }
