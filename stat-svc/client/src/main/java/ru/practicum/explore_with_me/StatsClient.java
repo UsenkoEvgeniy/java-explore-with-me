@@ -49,7 +49,8 @@ public class StatsClient {
         if (uris != null && !uris.isEmpty()) {
             path += "&uris=" + String.join("&uris=", uris);
         }
-        return objectMapper.convertValue(makeAndSendRequest(HttpMethod.GET, path, null).getBody(), new TypeReference<List<ViewStats>>(){});
+        return objectMapper.convertValue(makeAndSendRequest(HttpMethod.GET, path, null).getBody(), new TypeReference<>() {
+        });
     }
 
     public ResponseEntity<Object> saveHit(EndpointHitDto hit) {

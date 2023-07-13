@@ -43,7 +43,8 @@ public class CompilationServiceImpl implements CompilationService {
     @Override
     @Transactional(readOnly = true)
     public List<CompilationDto> getCompilations(Boolean pinned, Integer from, Integer size) {
-        return compilationRepository.findByPinned(pinned, new CustomPage(from, size)).stream()
+        CustomPage pageable = new CustomPage(from, size);
+        return compilationRepository.findByPinned(pinned, pageable).stream()
                 .map(CompilationMapper::toCompilationDto).collect(Collectors.toList());
     }
 

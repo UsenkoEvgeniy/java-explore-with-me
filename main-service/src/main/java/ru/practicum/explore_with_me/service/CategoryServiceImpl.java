@@ -34,8 +34,9 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto update(CategoryDto dto) {
-        existsById(dto.getId());
+    public CategoryDto update(Long catId, CategoryDto dto) {
+        existsById(catId);
+        dto.setId(catId);
         Category category = categoryRepository.save(CategoryMapper.categoryDtoToCategory(dto));
         return CategoryMapper.toCategoryDto(category);
     }
@@ -43,7 +44,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional(readOnly = true)
     public List<CategoryDto> getAll(Integer from, Integer size) {
-        Page<Category> catPage = categoryRepository.findAll(new CustomPage(from, size));
+        CustomPage pageable = new CustomPage(from, size);
+        Page<Category> catPage = categoryRepository.findAll(pageable);
         return catPage.stream().map(CategoryMapper::toCategoryDto).collect(Collectors.toList());
     }
 

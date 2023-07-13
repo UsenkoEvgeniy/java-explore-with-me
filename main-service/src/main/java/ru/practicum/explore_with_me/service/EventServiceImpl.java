@@ -45,7 +45,8 @@ public class EventServiceImpl implements EventService {
     @Override
     @Transactional(readOnly = true)
     public List<EventShortDto> getAllUserEvents(Long userId, Integer from, Integer size) {
-        return eventRepository.findByInitiator_Id(userId, new CustomPage(from, size)).stream()
+        CustomPage pageable = new CustomPage(from, size);
+        return eventRepository.findByInitiator_Id(userId, pageable).stream()
                 .map(EventMapper::toEventShortDto).collect(Collectors.toList());
 
     }
@@ -143,7 +144,8 @@ public class EventServiceImpl implements EventService {
             }
             return criteriaBuilder.and(predicates.toArray(Predicate[]::new));
         });
-        return eventRepository.findAll(specification, new CustomPage(from, size))
+        CustomPage pageable = new CustomPage(from, size);
+        return eventRepository.findAll(specification, pageable)
                 .map(EventMapper::toEventFullDto).toList();
     }
 
@@ -243,7 +245,8 @@ public class EventServiceImpl implements EventService {
         } else {
             sortParam = "id";
         }
-        List<Event> result = eventRepository.findAll(specification, new CustomPage(from, size).withSort(Sort.by(sortParam))).toList();
+        CustomPage pageable = new CustomPage(from, size);
+        List<Event> result = eventRepository.findAll(specification, pageable.withSort(Sort.by(sortParam))).toList();
         return result.stream().map(EventMapper::toEventShortDto).collect(Collectors.toList());
     }
 

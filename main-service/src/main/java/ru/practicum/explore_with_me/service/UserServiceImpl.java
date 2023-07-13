@@ -25,7 +25,6 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> getUsers(List<Long> ids, Integer from, Integer size) {
         return userRepository.findByIds(ids, new CustomPage(from, size)).stream()
                 .map(UserMapper::toUserDto).collect(Collectors.toList());
-
     }
 
     @Override
