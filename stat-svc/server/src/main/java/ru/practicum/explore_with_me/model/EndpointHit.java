@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.proxy.HibernateProxy;
-import ru.practicum.explore_with_me.EndpointHitDto;
+import ru.practicum.explore_with_me.DateConstant;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +33,7 @@ public class EndpointHit {
     private String app;
     private String uri;
     private String ip;
-    @JsonFormat(pattern = EndpointHitDto.DATE_TIME_PATTERN)
+    @JsonFormat(pattern = DateConstant.DATE_TIME_PATTERN)
     private LocalDateTime timestamp;
 
     @Override
