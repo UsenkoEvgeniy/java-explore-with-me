@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import ru.practicum.explore_with_me.repository.UserRepository;
 import ru.practicum.explore_with_me.service.UserService;
 import ru.practicum.explore_with_me.user.NewUserRequest;
 import ru.practicum.explore_with_me.user.UserDto;
+import ru.practicum.explore_with_me.user.UserRatingDto;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
@@ -28,6 +30,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Validated
 public class AdminUserController {
+    private final UserRepository userRepository;
     private final UserService userService;
 
     @GetMapping
@@ -51,5 +54,19 @@ public class AdminUserController {
     public void deleteUser(@PathVariable Long userId) {
         log.info("Delete request for userId {}", userId);
         userService.delete(userId);
+    }
+
+    //Рейтинги пользователей формируются на основании суммы рейтингов опубликованных ими событий
+    @GetMapping("/rating")
+    public List<UserRatingDto> getUsersByRating(@RequestParam(defaultValue = "0") @PositiveOrZero Integer from,
+                                                @RequestParam(defaultValue = "10") @Positive Integer size) {
+        log.info("Get request for all users by rating from {} size {}", from, size);
+        return userService.getUsersByRating(from, size);
+    }
+
+    @GetMapping("/{userId}/rating")
+    public UserRatingDto getUserWithRating(@PathVariable Long userId) {
+        log.info("Get request for user rating for id {}", userId);
+        return userService.getUserWithRating(userId);
     }
 }

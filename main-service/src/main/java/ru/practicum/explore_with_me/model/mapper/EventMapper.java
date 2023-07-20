@@ -6,6 +6,7 @@ import ru.practicum.explore_with_me.event.EventShortDto;
 import ru.practicum.explore_with_me.event.NewEventDto;
 import ru.practicum.explore_with_me.model.Category;
 import ru.practicum.explore_with_me.model.Event;
+import ru.practicum.explore_with_me.model.Like;
 
 @UtilityClass
 public class EventMapper {
@@ -44,6 +45,7 @@ public class EventMapper {
         dto.setState(event.getState().toString());
         dto.setTitle(event.getTitle());
         dto.setViews(event.getViews());
+        dto.setLikes(event.getLikes().stream().mapToInt(Like::getIntLike).sum());
         return dto;
     }
 
@@ -58,6 +60,7 @@ public class EventMapper {
         dto.setPaid(event.getPaid());
         dto.setTitle(event.getTitle());
         dto.setViews(event.getViews());
+        dto.setLikes(event.getLikes().stream().mapToInt(Like::getIntLike).sum());
         return dto;
     }
 }
