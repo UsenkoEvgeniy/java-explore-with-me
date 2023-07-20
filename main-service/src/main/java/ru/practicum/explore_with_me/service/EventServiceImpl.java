@@ -1,7 +1,6 @@
 package ru.practicum.explore_with_me.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +12,7 @@ import ru.practicum.explore_with_me.event.UpdateEventAdminRequest;
 import ru.practicum.explore_with_me.event.UpdateEventUserRequest;
 import ru.practicum.explore_with_me.model.Category;
 import ru.practicum.explore_with_me.model.Event;
+import ru.practicum.explore_with_me.model.Like;
 import ru.practicum.explore_with_me.model.State;
 import ru.practicum.explore_with_me.model.User;
 import ru.practicum.explore_with_me.model.exceptions.ForbiddenOperationException;
@@ -20,15 +20,18 @@ import ru.practicum.explore_with_me.model.exceptions.NotFoundException;
 import ru.practicum.explore_with_me.model.mapper.EventMapper;
 import ru.practicum.explore_with_me.model.mapper.LocationMapper;
 import ru.practicum.explore_with_me.repository.EventRepository;
+import ru.practicum.explore_with_me.repository.LikeRepository;
 import ru.practicum.explore_with_me.repository.UserRepository;
 import ru.practicum.explore_with_me.stats.ViewStats;
 import ru.practicum.explore_with_me.utils.CustomPage;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.validation.ValidationException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,6 +44,7 @@ public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
     private final UserRepository userRepository;
     private final StatsClient statsClient;
+    private final LikeRepository likeRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -228,25 +232,33 @@ public class EventServiceImpl implements EventService {
             if (onlyAvailable) {
                 predicates.add(criteriaBuilder.greaterThan(root.get("confirmedRequests"), root.get("participantLimit")));
             }
+            query.orderBy(criteriaBuilder.asc(root.get("id")));
+            if (sort != null) {
+                switch (sort) {
+                    case "EVENT_DATE":
+                        query.orderBy(criteriaBuilder.asc(root.get("eventDate")));
+                        break;
+                    case "VIEWS":
+                        query.orderBy(criteriaBuilder.desc(root.get("views")));
+                        break;
+                    case "REACTIONS":
+                        query.orderBy(criteriaBuilder.desc(criteriaBuilder.size(root.<Collection>get("likes"))));
+                        break;
+                    case "LIKES":
+                        query.orderBy(criteriaBuilder.desc(
+                                criteriaBuilder.sum(
+                                        criteriaBuilder.<Integer>selectCase()
+                                                .when(criteriaBuilder.isNotNull(root.join("likes", JoinType.LEFT).get("intLike")),
+                                                        root.join("likes", JoinType.LEFT).get("intLike"))
+                                .otherwise(0))));
+                        query.groupBy(root.get("id"));
+                        break;
+                }
+            }
             return criteriaBuilder.and(predicates.toArray(Predicate[]::new));
         });
-        String sortParam;
-        if (sort != null) {
-            switch (sort) {
-                case "EVENT_DATE":
-                    sortParam = "eventDate";
-                    break;
-                case "VIEWS":
-                    sortParam = "views";
-                    break;
-                default:
-                    sortParam = "id";
-            }
-        } else {
-            sortParam = "id";
-        }
         CustomPage pageable = new CustomPage(from, size);
-        List<Event> result = eventRepository.findAll(specification, pageable.withSort(Sort.by(sortParam))).toList();
+        List<Event> result = eventRepository.findAll(specification, pageable).toList();
         return result.stream().map(EventMapper::toEventShortDto).collect(Collectors.toList());
     }
 
@@ -262,5 +274,27 @@ public class EventServiceImpl implements EventService {
             event.setViews(rawStats.get(0).getHits());
         }
         return EventMapper.toEventFullDto(event);
+    }
+
+    @Override
+    public void addLike(Long userId, Long eventId, Boolean isLike) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("User", userId));
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new NotFoundException("Event", eventId));
+        Like like = new Like();
+        like.setEvent(event);
+        like.setUser(user);
+        like.setIntLike(isLike ? 1 : -1);
+        likeRepository.save(like);
+    }
+
+    @Override
+    public void deleteLike(Long userId, Long eventId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("User", userId));
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new NotFoundException("Event", eventId));
+        likeRepository.deleteByUserAndEvent(user, event);
     }
 }

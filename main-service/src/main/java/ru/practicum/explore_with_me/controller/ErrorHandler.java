@@ -24,26 +24,14 @@ import java.time.LocalDateTime;
 @Slf4j
 public class ErrorHandler {
 
-    @ExceptionHandler
+    @ExceptionHandler({ForbiddenOperationException.class, DataIntegrityViolationException.class})
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ApiError conflict(DataIntegrityViolationException e) {
+    public ApiError conflict(RuntimeException e) {
         log.error(stackTraceToString(e));
         return ApiError.builder()
                 .message(e.getMessage())
                 .reason("Integrity constraint has been violated.")
                 .status("CONFLICT")
-                .timestamp(LocalDateTime.now())
-                .build();
-    }
-
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public ApiError conflictEvent(ForbiddenOperationException e) {
-        log.error(stackTraceToString(e));
-        return ApiError.builder()
-                .message(e.getMessage())
-                .reason("For the requested operation the conditions are not met.")
-                .status("FORBIDDEN")
                 .timestamp(LocalDateTime.now())
                 .build();
     }

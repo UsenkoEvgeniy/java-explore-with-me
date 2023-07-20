@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -61,5 +62,22 @@ public class UserEventsController {
                                            @PathVariable Long eventId) {
         log.info("Patch request {} from userId {} for eventId {}", updateRequest, userId, eventId);
         return eventService.updateEventByOwner(updateRequest, userId, eventId);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/{eventId}/like")
+    public void addLike(@PathVariable Long userId,
+                        @PathVariable Long eventId,
+                        @RequestParam Boolean like) {
+        log.info("Post request for like {} from userId {} for eventId {}", like, userId, eventId);
+        eventService.addLike(userId, eventId, like);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{eventId}/like")
+    public void deleteLike(@PathVariable Long userId,
+                           @PathVariable Long eventId) {
+        log.info("Delete request for like from user {} for event {}", userId, eventId);
+        eventService.deleteLike(userId, eventId);
     }
 }

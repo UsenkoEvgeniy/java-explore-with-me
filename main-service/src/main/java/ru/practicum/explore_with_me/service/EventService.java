@@ -28,4 +28,8 @@ public interface EventService {
                                              Boolean onlyAvailable, String sort, Integer from, Integer size);
 
     EventFullDto getFullPublicEvent(Long eventId);
+
+    void addLike(Long userId, Long eventId, Boolean like);
+
+    void deleteLike(Long userId, Long eventId);
 }
