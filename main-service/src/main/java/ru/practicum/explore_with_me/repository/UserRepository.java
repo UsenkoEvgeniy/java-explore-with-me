@@ -15,12 +15,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByIds(@Param("ids") Collection<Long> ids, Pageable pageable);
 
     @Query(value = "select u.id, u.name, u.email, coalesce(sum(l.int_like), 0) as rating from users u " +
-            "left join events e on u.id = e.initiator left join event_likes l on e.id = l.event_id " +
-            "group by (u.id, u.name, u.email) order by rating desc", nativeQuery = true)
+            "left join events e on u.id = e.initiator " +
+            "left join event_likes l on e.id = l.event_id " +
+            "group by (u.id, u.name, u.email) " +
+            "order by rating desc", nativeQuery = true)
     List<UserRatingDto> findUsersByRating(Pageable pageable);
 
     @Query(value = "select u.id, u.name, u.email, coalesce(sum(l.int_like), 0) as rating from users u " +
-            "left join events e on u.id = e.initiator left join event_likes l on e.id = l.event_id " +
+            "left join events e on u.id = e.initiator " +
+            "left join event_likes l on e.id = l.event_id " +
             "where u.id = :uid " +
             "group by (u.id, u.name, u.email)", nativeQuery = true)
     UserRatingDto findUserWithRating(@Param("uid") Long userId);

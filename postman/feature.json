@@ -10,13 +10,24 @@
 			"name": "CreateDB",
 			"item": [
 				{
-					"name": "Create user136",
+					"name": "Create User1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"User1\", pm.response.json().id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"User136\",\r\n    \"email\":\"user1@email.com\"\r\n}",
+							"raw": "{\r\n    \"name\":\"{{$randomFullName}}\",\r\n    \"email\":\"{{$randomEmail}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,12 +35,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/admin/users",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/admin/users",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"admin",
 								"users"
@@ -39,7 +48,18 @@
 					"response": []
 				},
 				{
-					"name": "Create user137",
+					"name": "Create User2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"User2\", pm.response.json().id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -51,15 +71,13 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"User137\",\r\n    \"email\":\"user2@email.com\"\r\n}"
+							"raw": "{\r\n    \"name\":\"{{$randomFullName}}\",\r\n    \"email\":\"{{$randomEmail}}\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/admin/users",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/admin/users",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"admin",
 								"users"
@@ -69,7 +87,18 @@
 					"response": []
 				},
 				{
-					"name": "Create user138",
+					"name": "Create User3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"User3\", pm.response.json().id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -81,15 +110,13 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"User138\",\r\n    \"email\":\"user3@email.com\"\r\n}"
+							"raw": "{\r\n    \"name\":\"{{$randomFullName}}\",\r\n    \"email\":\"{{$randomEmail}}\"\r\n}"
 						},
 						"url": {
-							"raw": "http://localhost:8080/admin/users",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/admin/users",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"admin",
 								"users"
@@ -100,12 +127,23 @@
 				},
 				{
 					"name": "Create category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"cat1\", pm.response.json().id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"cat1\"\r\n}",
+							"raw": "{\r\n    \"name\":\"{{$randomNoun}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -113,12 +151,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/admin/categories",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/admin/categories",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"admin",
 								"categories"
@@ -128,13 +164,24 @@
 					"response": []
 				},
 				{
-					"name": "Create event106",
+					"name": "Create Event1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"Event1\", pm.response.json().id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"annotation\":\"Event1 Iure nihil earum perspiciatis.\",\r\n    \"category\":1,\r\n    \"description\":\"Maiores voluptas est eveniet culpa vero consectetur fuga quo.\",\r\n    \"eventDate\":\"2023-08-20 20:15:37\",\r\n    \"location\":{\"lat\":79.8837,\"lon\":14.1056},\r\n    \"paid\":\"false\",\r\n    \"participantLimit\":\"821\",\r\n    \"requestModeration\":\"true\",\r\n    \"title\":\"Event1 for likes\"\r\n}",
+							"raw": "{\r\n    \"annotation\":\"Event1 Iure nihil earum perspiciatis.\",\r\n    \"category\":{{cat1}},\r\n    \"description\":\"Maiores voluptas est eveniet culpa vero consectetur fuga quo.\",\r\n    \"eventDate\":\"2023-08-20 20:15:37\",\r\n    \"location\":{\"lat\":{{$randomLatitude}},\"lon\":{{$randomLongitude}}},\r\n    \"paid\":\"false\",\r\n    \"participantLimit\":\"111\",\r\n    \"requestModeration\":\"true\",\r\n    \"title\":\"Event1 for likes\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -142,15 +189,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/users/136/events",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/users/{{User1}}/events",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
-								"136",
+								"{{User1}}",
 								"events"
 							]
 						}
@@ -158,13 +203,24 @@
 					"response": []
 				},
 				{
-					"name": "Create event107",
+					"name": "Create Event2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"Event2\", pm.response.json().id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"annotation\":\"Event2 Iure nihil earum perspiciatis.\",\r\n    \"category\":1,\r\n    \"description\":\"Maiores voluptas est eveniet culpa vero consectetur fuga quo.\",\r\n    \"eventDate\":\"2023-08-20 20:15:37\",\r\n    \"location\":{\"lat\":79.8837,\"lon\":14.1056},\r\n    \"paid\":\"false\",\r\n    \"participantLimit\":\"222\",\r\n    \"requestModeration\":\"true\",\r\n    \"title\":\"Event2 for likes\"\r\n}",
+							"raw": "{\r\n    \"annotation\":\"Event2 Iure nihil earum perspiciatis.\",\r\n    \"category\":{{cat1}},\r\n    \"description\":\"Maiores voluptas est eveniet culpa vero consectetur fuga quo.\",\r\n    \"eventDate\":\"2023-08-20 20:15:37\",\r\n    \"location\":{\"lat\":{{$randomLatitude}},\"lon\":{{$randomLongitude}}},\r\n    \"paid\":\"false\",\r\n    \"participantLimit\":\"222\",\r\n    \"requestModeration\":\"true\",\r\n    \"title\":\"Event2 for likes\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -172,15 +228,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/users/137/events",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/users/{{User2}}/events",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
-								"137",
+								"{{User2}}",
 								"events"
 							]
 						}
@@ -188,13 +242,24 @@
 					"response": []
 				},
 				{
-					"name": "Create event108",
+					"name": "Create Event3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"Event3\", pm.response.json().id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"annotation\":\"Event3 Iure nihil earum perspiciatis.\",\r\n    \"category\":1,\r\n    \"description\":\"Maiores voluptas est eveniet culpa vero consectetur fuga quo.\",\r\n    \"eventDate\":\"2023-08-20 20:15:37\",\r\n    \"location\":{\"lat\":79.8837,\"lon\":14.1056},\r\n    \"paid\":\"false\",\r\n    \"participantLimit\":\"333\",\r\n    \"requestModeration\":\"true\",\r\n    \"title\":\"Event3 for likes\"\r\n}",
+							"raw": "{\r\n    \"annotation\":\"Event3 Iure nihil earum perspiciatis.\",\r\n    \"category\":{{cat1}},\r\n    \"description\":\"Maiores voluptas est eveniet culpa vero consectetur fuga quo.\",\r\n    \"eventDate\":\"2023-08-20 20:15:37\",\r\n    \"location\":{\"lat\":{{$randomLatitude}},\"lon\":{{$randomLongitude}}},\r\n    \"paid\":\"false\",\r\n    \"participantLimit\":\"333\",\r\n    \"requestModeration\":\"true\",\r\n    \"title\":\"Event3 for likes\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -202,15 +267,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/users/137/events",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/users/{{User2}}/events",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
-								"137",
+								"{{User2}}",
 								"events"
 							]
 						}
@@ -218,13 +281,24 @@
 					"response": []
 				},
 				{
-					"name": "Create event109",
+					"name": "Create Event4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"Event4\", pm.response.json().id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"annotation\":\"Event4 Iure nihil earum perspiciatis.\",\r\n    \"category\":1,\r\n    \"description\":\"Maiores voluptas est eveniet culpa vero consectetur fuga quo.\",\r\n    \"eventDate\":\"2023-08-20 20:15:37\",\r\n    \"location\":{\"lat\":79.8837,\"lon\":14.1056},\r\n    \"paid\":\"false\",\r\n    \"participantLimit\":\"444\",\r\n    \"requestModeration\":\"true\",\r\n    \"title\":\"Event4 for likes\"\r\n}",
+							"raw": "{\r\n    \"annotation\":\"Event4 Iure nihil earum perspiciatis.\",\r\n    \"category\":{{cat1}},\r\n    \"description\":\"Maiores voluptas est eveniet culpa vero consectetur fuga quo.\",\r\n    \"eventDate\":\"2023-08-20 20:15:37\",\r\n    \"location\":{\"lat\":{{$randomLatitude}},\"lon\":{{$randomLongitude}}},\r\n    \"paid\":\"false\",\r\n    \"participantLimit\":\"444\",\r\n    \"requestModeration\":\"true\",\r\n    \"title\":\"Event4 for likes\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -232,15 +306,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/users/3/events",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/users/{{User3}}/events",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
-								"3",
+								"{{User3}}",
 								"events"
 							]
 						}
@@ -248,7 +320,7 @@
 					"response": []
 				},
 				{
-					"name": "Publish event106",
+					"name": "Publish Event1",
 					"request": {
 						"method": "PATCH",
 						"header": [],
@@ -262,23 +334,21 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/admin/events/106",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/admin/events/{{Event1}}",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"admin",
 								"events",
-								"106"
+								"{{Event1}}"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Publish event107",
+					"name": "Publish Event2",
 					"request": {
 						"method": "PATCH",
 						"header": [],
@@ -292,23 +362,21 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/admin/events/107",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/admin/events/{{Event2}}",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"admin",
 								"events",
-								"107"
+								"{{Event2}}"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Publish event108",
+					"name": "Publish Event3",
 					"request": {
 						"method": "PATCH",
 						"header": [],
@@ -322,23 +390,21 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/admin/events/108",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/admin/events/{{Event3}}",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"admin",
 								"events",
-								"108"
+								"{{Event3}}"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Publish event109",
+					"name": "Publish Event4",
 					"request": {
 						"method": "PATCH",
 						"header": [],
@@ -352,16 +418,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/admin/events/109",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/admin/events/{{Event4}}",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"admin",
 								"events",
-								"109"
+								"{{Event4}}"
 							]
 						}
 					},
@@ -373,7 +437,7 @@
 			"name": "Add likes",
 			"item": [
 				{
-					"name": "Create like from user 136 to event 106",
+					"name": "Create like from User1 to Event1",
 					"event": [
 						{
 							"listen": "test",
@@ -391,17 +455,15 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/users/136/events/106/like?like=true",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/users/{{User1}}/events/{{Event1}}/like?like=true",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
-								"136",
+								"{{User1}}",
 								"events",
-								"106",
+								"{{Event1}}",
 								"like"
 							],
 							"query": [
@@ -415,7 +477,7 @@
 					"response": []
 				},
 				{
-					"name": "Create like from user 136 to event 107",
+					"name": "Create like from User1 to Event2",
 					"event": [
 						{
 							"listen": "test",
@@ -433,17 +495,15 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/users/136/events/107/like?like=true",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/users/{{User1}}/events/{{Event2}}/like?like=true",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
-								"136",
+								"{{User1}}",
 								"events",
-								"107",
+								"{{Event2}}",
 								"like"
 							],
 							"query": [
@@ -457,7 +517,7 @@
 					"response": []
 				},
 				{
-					"name": "Create like from user 137 to event 106",
+					"name": "Create like from User2 to Event1",
 					"event": [
 						{
 							"listen": "test",
@@ -475,17 +535,15 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/users/137/events/106/like?like=true",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/users/{{User2}}/events/{{Event1}}/like?like=true",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
-								"137",
+								"{{User2}}",
 								"events",
-								"106",
+								"{{Event1}}",
 								"like"
 							],
 							"query": [
@@ -499,7 +557,7 @@
 					"response": []
 				},
 				{
-					"name": "Create dislike from user 137 to event 108",
+					"name": "Create dislike from User2 to Event3",
 					"event": [
 						{
 							"listen": "test",
@@ -517,17 +575,15 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/users/137/events/108/like?like=false",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/users/{{User2}}/events/{{Event3}}/like?like=false",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
-								"137",
+								"{{User2}}",
 								"events",
-								"108",
+								"{{Event3}}",
 								"like"
 							],
 							"query": [
@@ -541,7 +597,7 @@
 					"response": []
 				},
 				{
-					"name": "Create dislike from user 136 to event 108",
+					"name": "Create dislike from User1 to Event3",
 					"event": [
 						{
 							"listen": "test",
@@ -559,17 +615,15 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/users/136/events/108/like?like=false",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/users/{{User1}}/events/{{Event3}}/like?like=false",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
-								"136",
+								"{{User1}}",
 								"events",
-								"108",
+								"{{Event3}}",
 								"like"
 							],
 							"query": [
@@ -583,7 +637,7 @@
 					"response": []
 				},
 				{
-					"name": "Create dislike from user 138 to event 108",
+					"name": "Create dislike from User3 to Event3",
 					"event": [
 						{
 							"listen": "test",
@@ -601,17 +655,15 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/users/138/events/108/like?like=false",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/users/{{User3}}/events/{{Event3}}/like?like=false",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
-								"138",
+								"{{User3}}",
 								"events",
-								"108",
+								"{{Event3}}",
 								"like"
 							],
 							"query": [
@@ -625,7 +677,7 @@
 					"response": []
 				},
 				{
-					"name": "Create second like from user 136 to event 106 conflict",
+					"name": "Create second like from User1 to Event1 conflict",
 					"event": [
 						{
 							"listen": "test",
@@ -643,17 +695,15 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/users/136/events/106/like?like=true",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/users/{{User1}}/events/{{Event1}}/like?like=true",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
-								"136",
+								"{{User1}}",
 								"events",
-								"106",
+								"{{Event1}}",
 								"like"
 							],
 							"query": [
@@ -685,17 +735,15 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/users/999/events/1/like?like=true",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/users/999/events/{{Event1}}/like?like=true",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
 								"999",
 								"events",
-								"1",
+								"{{Event1}}",
 								"like"
 							],
 							"query": [
@@ -727,15 +775,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/users/1/events/999/like?like=true",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/users/{{User1}}/events/999/like?like=true",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
-								"1",
+								"{{User1}}",
 								"events",
 								"999",
 								"like"
@@ -756,16 +802,16 @@
 			"name": "Check rating endpoints",
 			"item": [
 				{
-					"name": "Check event106 has 2 like",
+					"name": "Check Event1 has 2 like",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"У event1 должно быть 2 лайка\", function(){\r",
+									"pm.test(\"У Event1 должно быть 2 лайка\", function(){\r",
 									"    pm.response.to.be.ok;\r",
 									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson.id).to.eql(106);\r",
+									"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"Event1\"));\r",
 									"    pm.expect(responseJson.likes).to.eql(2);\r",
 									"});"
 								],
@@ -777,33 +823,31 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/users/136/events/106",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/users/{{User1}}/events/{{Event1}}",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
-								"136",
+								"{{User1}}",
 								"events",
-								"106"
+								"{{Event1}}"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Check event107 has 1 like",
+					"name": "Check Event2 has 1 like",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"У event2 должен быть 1 лайк\", function(){\r",
+									"pm.test(\"У Event2 должен быть 1 лайк\", function(){\r",
 									"    pm.response.to.be.ok;\r",
 									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson.id).to.eql(107);\r",
+									"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"Event2\"));\r",
 									"    pm.expect(responseJson.likes).to.eql(1);\r",
 									"});"
 								],
@@ -815,33 +859,31 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/users/137/events/107",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/users/{{User2}}/events/{{Event2}}",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
-								"137",
+								"{{User2}}",
 								"events",
-								"107"
+								"{{Event2}}"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Check event3 has 3 dislikes",
+					"name": "Check Event3 has 3 dislikes",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"У event3 должно быть 3 дизлайка\", function(){\r",
+									"pm.test(\"У Event3 должно быть 3 дизлайка\", function(){\r",
 									"    pm.response.to.be.ok;\r",
 									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson.id).to.eql(108);\r",
+									"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"Event3\"));\r",
 									"    pm.expect(responseJson.likes).to.eql(-3);\r",
 									"});"
 								],
@@ -853,17 +895,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/users/137/events/108",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/users/{{User2}}/events/{{Event3}}",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"users",
-								"137",
+								"{{User2}}",
 								"events",
-								"108"
+								"{{Event3}}"
 							]
 						}
 					},
@@ -888,9 +928,9 @@
 									"pm.test(\"Сортировка должна выдать 108 107 106\", function(){\r",
 									"    pm.response.to.be.ok;\r",
 									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson[0].id).to.eql(108);\r",
-									"    pm.expect(responseJson[1].id).to.eql(106);\r",
-									"    pm.expect(responseJson[2].id).to.eql(107);\r",
+									"    pm.expect(responseJson[0].id).to.eql(pm.collectionVariables.get(\"Event3\"));\r",
+									"    pm.expect(responseJson[1].id).to.eql(pm.collectionVariables.get(\"Event1\"));\r",
+									"    pm.expect(responseJson[2].id).to.eql(pm.collectionVariables.get(\"Event2\"));\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -906,12 +946,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/events?sort=REACTIONS",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/events?sort=REACTIONS",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"events"
 							],
@@ -945,8 +983,8 @@
 									"pm.test(\"Сортировка должна выдать 106 107\", function(){\r",
 									"    pm.response.to.be.ok;\r",
 									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson[0].id).to.eql(106);\r",
-									"    pm.expect(responseJson[1].id).to.eql(107);\r",
+									"    pm.expect(responseJson[0].id).to.eql(pm.collectionVariables.get(\"Event1\"));\r",
+									"    pm.expect(responseJson[1].id).to.eql(pm.collectionVariables.get(\"Event2\"));\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -962,12 +1000,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/events?sort=LIKES",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/events?sort=LIKES",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"events"
 							],
@@ -1001,7 +1037,7 @@
 									"pm.test(\"Сортировка должна выдать первым пользователя 106\", function(){\r",
 									"    pm.response.to.be.ok;\r",
 									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson[0].id).to.eql(136);\r",
+									"    pm.expect(responseJson[0].id).to.eql(pm.collectionVariables.get(\"User1\"));\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1017,12 +1053,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/admin/users/rating",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/admin/users/rating",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"admin",
 								"users",
@@ -1052,7 +1086,7 @@
 									"pm.test(\"Рейтинг user106 должен быть 2\", function(){\r",
 									"    pm.response.to.be.ok;\r",
 									"    const responseJson = pm.response.json();\r",
-									"    pm.expect(responseJson.id).to.eql(136);\r",
+									"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"User1\"));\r",
 									"    pm.expect(responseJson.rating).to.eql(2);\r",
 									"});"
 								],
@@ -1069,16 +1103,14 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/admin/users/136/rating",
-							"protocol": "http",
+							"raw": "{{baseUrl}}/admin/users/{{User1}}/rating",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"admin",
 								"users",
-								"136",
+								"{{User1}}",
 								"rating"
 							]
 						},
@@ -1087,6 +1119,65 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "User1",
+			"value": ""
+		},
+		{
+			"key": "User2",
+			"value": ""
+		},
+		{
+			"key": "User3",
+			"value": ""
+		},
+		{
+			"key": "cat1",
+			"value": ""
+		},
+		{
+			"key": "Event1",
+			"value": ""
+		},
+		{
+			"key": "Event2",
+			"value": ""
+		},
+		{
+			"key": "Event3",
+			"value": ""
+		},
+		{
+			"key": "Event4",
+			"value": ""
 		}
 	]
 }
