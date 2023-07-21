@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS events CASCADE;
 DROP TABLE IF EXISTS requests CASCADE;
 DROP TABLE IF EXISTS compilations CASCADE;
 DROP TABLE IF EXISTS compilation_event CASCADE;
+DROP TABLE IF EXISTS event_likes CASCADE;
 
 CREATE TABLE IF NOT EXISTS users (
     id BIGINT GENERATED ALWAYS AS IDENTITY NOT NULL,
@@ -75,4 +76,15 @@ CREATE TABLE IF NOT EXISTS compilation_event (
     event_id BIGINT,
     CONSTRAINT fk_ce_compilation_id FOREIGN KEY (compilation_id) REFERENCES compilations (id),
     CONSTRAINT fk_ce_event_id FOREIGN KEY (event_id) REFERENCES events (id)
+);
+
+CREATE TABLE IF NOT EXISTS event_likes (
+    id BIGINT GENERATED ALWAYS AS IDENTITY NOT NULL,
+    user_id BIGINT,
+    event_id BIGINT,
+    int_like INTEGER,
+    CONSTRAINT pk_event_rating PRIMARY KEY (id),
+    CONSTRAINT fk_el_user_id FOREIGN KEY (user_id) REFERENCES users (id),
+    CONSTRAINT fk_el_event_id FOREIGN KEY (event_id) REFERENCES events (id),
+    CONSTRAINT uq_el_user_id_event_id UNIQUE (event_id, user_id)
 );

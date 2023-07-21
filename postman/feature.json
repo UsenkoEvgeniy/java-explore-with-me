@@ -1,0 +1,1183 @@
+{
+	"info": {
+		"_postman_id": "1d1a69a1-5952-49a0-87cf-16694f4585c6",
+		"name": "FeatureTests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12734979"
+	},
+	"item": [
+		{
+			"name": "CreateDB",
+			"item": [
+				{
+					"name": "Create User1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"User1\", pm.response.json().id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"{{$randomFullName}}\",\r\n    \"email\":\"{{$randomEmail}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"User2\", pm.response.json().id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"{{$randomFullName}}\",\r\n    \"email\":\"{{$randomEmail}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"User3\", pm.response.json().id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"{{$randomFullName}}\",\r\n    \"email\":\"{{$randomEmail}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"cat1\", pm.response.json().id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"{{$randomNoun}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Event1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"Event1\", pm.response.json().id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"annotation\":\"Event1 Iure nihil earum perspiciatis.\",\r\n    \"category\":{{cat1}},\r\n    \"description\":\"Maiores voluptas est eveniet culpa vero consectetur fuga quo.\",\r\n    \"eventDate\":\"2023-08-20 20:15:37\",\r\n    \"location\":{\"lat\":{{$randomLatitude}},\"lon\":{{$randomLongitude}}},\r\n    \"paid\":\"false\",\r\n    \"participantLimit\":\"111\",\r\n    \"requestModeration\":\"true\",\r\n    \"title\":\"Event1 for likes\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/{{User1}}/events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{User1}}",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Event2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"Event2\", pm.response.json().id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"annotation\":\"Event2 Iure nihil earum perspiciatis.\",\r\n    \"category\":{{cat1}},\r\n    \"description\":\"Maiores voluptas est eveniet culpa vero consectetur fuga quo.\",\r\n    \"eventDate\":\"2023-08-20 20:15:37\",\r\n    \"location\":{\"lat\":{{$randomLatitude}},\"lon\":{{$randomLongitude}}},\r\n    \"paid\":\"false\",\r\n    \"participantLimit\":\"222\",\r\n    \"requestModeration\":\"true\",\r\n    \"title\":\"Event2 for likes\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/{{User2}}/events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{User2}}",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Event3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"Event3\", pm.response.json().id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"annotation\":\"Event3 Iure nihil earum perspiciatis.\",\r\n    \"category\":{{cat1}},\r\n    \"description\":\"Maiores voluptas est eveniet culpa vero consectetur fuga quo.\",\r\n    \"eventDate\":\"2023-08-20 20:15:37\",\r\n    \"location\":{\"lat\":{{$randomLatitude}},\"lon\":{{$randomLongitude}}},\r\n    \"paid\":\"false\",\r\n    \"participantLimit\":\"333\",\r\n    \"requestModeration\":\"true\",\r\n    \"title\":\"Event3 for likes\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/{{User2}}/events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{User2}}",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Event4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"Event4\", pm.response.json().id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"annotation\":\"Event4 Iure nihil earum perspiciatis.\",\r\n    \"category\":{{cat1}},\r\n    \"description\":\"Maiores voluptas est eveniet culpa vero consectetur fuga quo.\",\r\n    \"eventDate\":\"2023-08-20 20:15:37\",\r\n    \"location\":{\"lat\":{{$randomLatitude}},\"lon\":{{$randomLongitude}}},\r\n    \"paid\":\"false\",\r\n    \"participantLimit\":\"444\",\r\n    \"requestModeration\":\"true\",\r\n    \"title\":\"Event4 for likes\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/{{User3}}/events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{User3}}",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Publish Event1",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stateAction\":\"PUBLISH_EVENT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/events/{{Event1}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"events",
+								"{{Event1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Publish Event2",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stateAction\":\"PUBLISH_EVENT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/events/{{Event2}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"events",
+								"{{Event2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Publish Event3",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stateAction\":\"PUBLISH_EVENT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/events/{{Event3}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"events",
+								"{{Event3}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Publish Event4",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stateAction\":\"PUBLISH_EVENT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/events/{{Event4}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"events",
+								"{{Event4}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Add likes",
+			"item": [
+				{
+					"name": "Create like from User1 to Event1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Код ответа должен быть 201\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/{{User1}}/events/{{Event1}}/like?like=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{User1}}",
+								"events",
+								"{{Event1}}",
+								"like"
+							],
+							"query": [
+								{
+									"key": "like",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create like from User1 to Event2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Код ответа должен быть 201\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/{{User1}}/events/{{Event2}}/like?like=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{User1}}",
+								"events",
+								"{{Event2}}",
+								"like"
+							],
+							"query": [
+								{
+									"key": "like",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create like from User2 to Event1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Код ответа должен быть 201\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/{{User2}}/events/{{Event1}}/like?like=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{User2}}",
+								"events",
+								"{{Event1}}",
+								"like"
+							],
+							"query": [
+								{
+									"key": "like",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create dislike from User2 to Event3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Код ответа должен быть 201\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/{{User2}}/events/{{Event3}}/like?like=false",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{User2}}",
+								"events",
+								"{{Event3}}",
+								"like"
+							],
+							"query": [
+								{
+									"key": "like",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create dislike from User1 to Event3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Код ответа должен быть 201\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/{{User1}}/events/{{Event3}}/like?like=false",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{User1}}",
+								"events",
+								"{{Event3}}",
+								"like"
+							],
+							"query": [
+								{
+									"key": "like",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create dislike from User3 to Event3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Код ответа должен быть 201\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/{{User3}}/events/{{Event3}}/like?like=false",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{User3}}",
+								"events",
+								"{{Event3}}",
+								"like"
+							],
+							"query": [
+								{
+									"key": "like",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create second like from User1 to Event1 conflict",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Код ответа должен быть 409\", function(){\r",
+									"    pm.response.to.have.status(409);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/{{User1}}/events/{{Event1}}/like?like=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{User1}}",
+								"events",
+								"{{Event1}}",
+								"like"
+							],
+							"query": [
+								{
+									"key": "like",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create like from user 999 Not Found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Код ответа должен быть 404\", function(){\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/999/events/{{Event1}}/like?like=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"999",
+								"events",
+								"{{Event1}}",
+								"like"
+							],
+							"query": [
+								{
+									"key": "like",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create like for event 999 Not Found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Код ответа должен быть 404\", function(){\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/{{User1}}/events/999/like?like=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{User1}}",
+								"events",
+								"999",
+								"like"
+							],
+							"query": [
+								{
+									"key": "like",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Check rating endpoints",
+			"item": [
+				{
+					"name": "Check Event1 has 2 like",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"У Event1 должно быть 2 лайка\", function(){\r",
+									"    pm.response.to.be.ok;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"Event1\"));\r",
+									"    pm.expect(responseJson.likes).to.eql(2);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/{{User1}}/events/{{Event1}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{User1}}",
+								"events",
+								"{{Event1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Event2 has 1 like",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"У Event2 должен быть 1 лайк\", function(){\r",
+									"    pm.response.to.be.ok;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"Event2\"));\r",
+									"    pm.expect(responseJson.likes).to.eql(1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/{{User2}}/events/{{Event2}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{User2}}",
+								"events",
+								"{{Event2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Event3 has 3 dislikes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"У Event3 должно быть 3 дизлайка\", function(){\r",
+									"    pm.response.to.be.ok;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"Event3\"));\r",
+									"    pm.expect(responseJson.likes).to.eql(-3);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/{{User2}}/events/{{Event3}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"{{User2}}",
+								"events",
+								"{{Event3}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение событий сортировка по общему количеству реакций",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Сортировка должна выдать 108 107 106\", function(){\r",
+									"    pm.response.to.be.ok;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson[0].id).to.eql(pm.collectionVariables.get(\"Event3\"));\r",
+									"    pm.expect(responseJson[1].id).to.eql(pm.collectionVariables.get(\"Event1\"));\r",
+									"    pm.expect(responseJson[2].id).to.eql(pm.collectionVariables.get(\"Event2\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/events?sort=REACTIONS",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "REACTIONS"
+								}
+							]
+						},
+						"description": "Обратите внимание: \n- это публичный эндпоинт, соответственно в выдаче должны быть только опубликованные события\n- текстовый поиск (по аннотации и подробному описанию) должен быть без учета регистра букв\n- если в запросе не указан диапазон дат [rangeStart-rangeEnd], то нужно выгружать события, которые произойдут позже текущей даты и времени\n- информация о каждом событии должна включать в себя количество просмотров и количество уже одобренных заявок на участие\n- информацию о том, что по этому эндпоинту был осуществлен и обработан запрос, нужно сохранить в сервисе статистики"
+					},
+					"response": []
+				},
+				{
+					"name": "Получение событий сортировка по лайкам",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Сортировка должна выдать 106 107\", function(){\r",
+									"    pm.response.to.be.ok;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson[0].id).to.eql(pm.collectionVariables.get(\"Event1\"));\r",
+									"    pm.expect(responseJson[1].id).to.eql(pm.collectionVariables.get(\"Event2\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/events?sort=LIKES",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "LIKES"
+								}
+							]
+						},
+						"description": "Обратите внимание: \n- это публичный эндпоинт, соответственно в выдаче должны быть только опубликованные события\n- текстовый поиск (по аннотации и подробному описанию) должен быть без учета регистра букв\n- если в запросе не указан диапазон дат [rangeStart-rangeEnd], то нужно выгружать события, которые произойдут позже текущей даты и времени\n- информация о каждом событии должна включать в себя количество просмотров и количество уже одобренных заявок на участие\n- информацию о том, что по этому эндпоинту был осуществлен и обработан запрос, нужно сохранить в сервисе статистики"
+					},
+					"response": []
+				},
+				{
+					"name": "Получение пользователей сортировка по лайкам",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Сортировка должна выдать первым пользователя 106\", function(){\r",
+									"    pm.response.to.be.ok;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson[0].id).to.eql(pm.collectionVariables.get(\"User1\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/users/rating",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"rating"
+							]
+						},
+						"description": "Обратите внимание: \n- это публичный эндпоинт, соответственно в выдаче должны быть только опубликованные события\n- текстовый поиск (по аннотации и подробному описанию) должен быть без учета регистра букв\n- если в запросе не указан диапазон дат [rangeStart-rangeEnd], то нужно выгружать события, которые произойдут позже текущей даты и времени\n- информация о каждом событии должна включать в себя количество просмотров и количество уже одобренных заявок на участие\n- информацию о том, что по этому эндпоинту был осуществлен и обработан запрос, нужно сохранить в сервисе статистики"
+					},
+					"response": []
+				},
+				{
+					"name": "Получение рейтинга пользователя",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Рейтинг user106 должен быть 2\", function(){\r",
+									"    pm.response.to.be.ok;\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"User1\"));\r",
+									"    pm.expect(responseJson.rating).to.eql(2);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/users/{{User1}}/rating",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"{{User1}}",
+								"rating"
+							]
+						},
+						"description": "Обратите внимание: \n- это публичный эндпоинт, соответственно в выдаче должны быть только опубликованные события\n- текстовый поиск (по аннотации и подробному описанию) должен быть без учета регистра букв\n- если в запросе не указан диапазон дат [rangeStart-rangeEnd], то нужно выгружать события, которые произойдут позже текущей даты и времени\n- информация о каждом событии должна включать в себя количество просмотров и количество уже одобренных заявок на участие\n- информацию о том, что по этому эндпоинту был осуществлен и обработан запрос, нужно сохранить в сервисе статистики"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "User1",
+			"value": ""
+		},
+		{
+			"key": "User2",
+			"value": ""
+		},
+		{
+			"key": "User3",
+			"value": ""
+		},
+		{
+			"key": "cat1",
+			"value": ""
+		},
+		{
+			"key": "Event1",
+			"value": ""
+		},
+		{
+			"key": "Event2",
+			"value": ""
+		},
+		{
+			"key": "Event3",
+			"value": ""
+		},
+		{
+			"key": "Event4",
+			"value": ""
+		}
+	]
+}

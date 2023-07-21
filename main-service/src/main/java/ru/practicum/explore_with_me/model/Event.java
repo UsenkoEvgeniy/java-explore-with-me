@@ -15,9 +15,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "events")
@@ -52,4 +55,7 @@ public class Event {
     private State state;
     private String title;
     private Integer views;
+    @OneToMany(mappedBy = "event", orphanRemoval = true)
+    @ToString.Exclude
+    private Set<Like> likes = new HashSet<>();
 }

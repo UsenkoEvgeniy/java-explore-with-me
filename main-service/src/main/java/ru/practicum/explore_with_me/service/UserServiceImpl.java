@@ -9,6 +9,7 @@ import ru.practicum.explore_with_me.model.mapper.UserMapper;
 import ru.practicum.explore_with_me.repository.UserRepository;
 import ru.practicum.explore_with_me.user.NewUserRequest;
 import ru.practicum.explore_with_me.user.UserDto;
+import ru.practicum.explore_with_me.user.UserRatingDto;
 import ru.practicum.explore_with_me.utils.CustomPage;
 
 import java.util.List;
@@ -39,5 +40,18 @@ public class UserServiceImpl implements UserService {
             throw new NotFoundException("User", userId);
         }
         userRepository.deleteById(userId);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<UserRatingDto> getUsersByRating(Integer from, Integer size) {
+        CustomPage pageable = new CustomPage(from, size);
+        return userRepository.findUsersByRating(pageable);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public UserRatingDto getUserWithRating(Long userId) {
+        return userRepository.findUserWithRating(userId);
     }
 }
